@@ -5,6 +5,6 @@ class WxPay extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'WxPayApi';
+        return 'wxpayapi';
     }
 }

@@ -25,9 +25,9 @@ class WxPayProvider extends ServiceProvider
      */
     public function register()
     {
-        $config = config('WxPay');
-        $this->app->singleton("WxPayApi", function () use ($config) {
-            return new WxPayApi($config);
+        // $config = config('WxPay');
+        $this->app->singleton("wxpayapi", function () use ($config) {
+            return new wxpayapi();
         });
     }
 }
