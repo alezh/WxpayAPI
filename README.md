@@ -16,6 +16,6 @@ composer require alezh/WxPay
 下载完毕之后,直接配置 `config/app.php` 的 `providers`:
 
 ```php
-\Alezh\WxPay\WxPayApi::class,
+\Alezh\WxPay\WxPayProvider::class,
 ```
 $ php artisan vendor:publish --provider="Alezh\WxPay\WxPayProvider"
