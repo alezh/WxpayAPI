@@ -4,7 +4,7 @@ namespace Alezh\WxPay;
 
 use Illuminate\Support\ServiceProvider;
 
-class AopClientProvider extends ServiceProvider
+class WxPayProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -27,7 +27,7 @@ class AopClientProvider extends ServiceProvider
     {
         $config = config('WxPay');
         $this->app->singleton("WxPayApi", function () use ($config) {
-            return new AopClient($config);
+            return new WxPayApi($config);
         });
     }
 }
