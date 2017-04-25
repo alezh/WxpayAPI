@@ -9,7 +9,7 @@ namespace Alezh\WxPay;
  * @author widyhu
  *
  */
-class wxpayapi
+class WxpayApi
 {
 	/**
 	 *
@@ -20,7 +20,7 @@ class wxpayapi
 	 * @throws WxPayException
 	 * @return 成功时返回，其他抛异常
 	 */
-	public static function unifiedOrder($inputObj, $timeOut = 6)
+	public function unifiedOrder($inputObj, $timeOut = 6)
 	{
 		$url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 		//检测必填参数
@@ -74,7 +74,7 @@ class wxpayapi
 	 * @throws WxPayException
 	 * @return 成功时返回，其他抛异常
 	 */
-	public static function orderQuery($inputObj, $timeOut = 6)
+	public function orderQuery($inputObj, $timeOut = 6)
 	{
 		$url = "https://api.mch.weixin.qq.com/pay/orderquery";
 		//检测必填参数
@@ -105,7 +105,7 @@ class wxpayapi
 	 * @throws WxPayException
 	 * @return 成功时返回，其他抛异常
 	 */
-	public static function closeOrder($inputObj, $timeOut = 6)
+	public function closeOrder($inputObj, $timeOut = 6)
 	{
 		$url = "https://api.mch.weixin.qq.com/pay/closeorder";
 		//检测必填参数
@@ -137,7 +137,7 @@ class wxpayapi
 	 * @throws WxPayException
 	 * @return 成功时返回，其他抛异常
 	 */
-	public static function refund($inputObj, $timeOut = 6)
+	public function refund($inputObj, $timeOut = 6)
 	{
 		$url = "https://api.mch.weixin.qq.com/secapi/pay/refund";
 		//检测必填参数
@@ -178,7 +178,7 @@ class wxpayapi
 	 * @throws WxPayException
 	 * @return 成功时返回，其他抛异常
 	 */
-	public static function refundQuery($inputObj, $timeOut = 6)
+	public function refundQuery($inputObj, $timeOut = 6)
 	{
 		$url = "https://api.mch.weixin.qq.com/pay/refundquery";
 		//检测必填参数
@@ -211,7 +211,7 @@ class wxpayapi
 	 * @throws WxPayException
 	 * @return 成功时返回，其他抛异常
 	 */
-	public static function downloadBill($inputObj, $timeOut = 6)
+	public function downloadBill($inputObj, $timeOut = 6)
 	{
 		$url = "https://api.mch.weixin.qq.com/pay/downloadbill";
 		//检测必填参数
@@ -241,7 +241,7 @@ class wxpayapi
 	 * @param WxPayWxPayMicroPay $inputObj
 	 * @param int $timeOut
 	 */
-	public static function micropay($inputObj, $timeOut = 10)
+	public function micropay($inputObj, $timeOut = 10)
 	{
 		$url = "https://api.mch.weixin.qq.com/pay/micropay";
 		//检测必填参数
@@ -279,7 +279,7 @@ class wxpayapi
 	 * @param int $timeOut
 	 * @throws WxPayException
 	 */
-	public static function reverse($inputObj, $timeOut = 6)
+	public function reverse($inputObj, $timeOut = 6)
 	{
 		$url = "https://api.mch.weixin.qq.com/secapi/pay/reverse";
 		//检测必填参数
@@ -312,7 +312,7 @@ class wxpayapi
 	 * @throws WxPayException
 	 * @return 成功时返回，其他抛异常
 	 */
-	public static function report($inputObj, $timeOut = 1)
+	public function report($inputObj, $timeOut = 1)
 	{
 		$url = "https://api.mch.weixin.qq.com/payitil/report";
 		//检测必填参数
@@ -350,7 +350,7 @@ class wxpayapi
 	 * @throws WxPayException
 	 * @return 成功时返回，其他抛异常
 	 */
-	public static function bizpayurl($inputObj, $timeOut = 6)
+	public function bizpayurl($inputObj, $timeOut = 6)
 	{
 		if(!$inputObj->IsProduct_idSet()){
 			throw new WxPayException("生成二维码，缺少必填参数product_id！");
@@ -377,7 +377,7 @@ class wxpayapi
 	 * @throws WxPayException
 	 * @return 成功时返回，其他抛异常
 	 */
-	public static function shorturl($inputObj, $timeOut = 6)
+	public function shorturl($inputObj, $timeOut = 6)
 	{
 		$url = "https://api.mch.weixin.qq.com/tools/shorturl";
 		//检测必填参数
@@ -407,7 +407,7 @@ class wxpayapi
  	 * 回调类成员函数方法:notify(array($this, you_function));
  	 * $callback  原型为：function function_name($data){}
  	 */
-	public static function notify($callback, &$msg)
+	public function notify($callback, &$msg)
 	{
 		//获取通知的数据
 		$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
@@ -428,7 +428,7 @@ class wxpayapi
 	 * @param int $length
 	 * @return 产生的随机字符串
 	 */
-	public static function getNonceStr($length = 32)
+	public function getNonceStr($length = 32)
 	{
 		$chars = "abcdefghijklmnopqrstuvwxyz0123456789";
 		$str ="";
@@ -442,7 +442,7 @@ class wxpayapi
 	 * 直接输出xml
 	 * @param string $xml
 	 */
-	public static function replyNotify($xml)
+	public function replyNotify($xml)
 	{
 		echo $xml;
 	}
@@ -454,14 +454,14 @@ class wxpayapi
 	 * @param int $startTimeStamp
 	 * @param array $data
 	 */
-	private static function reportCostTime($url, $startTimeStamp, $data)
+	private function reportCostTime($url, $startTimeStamp, $data)
 	{
 		//如果不需要上报数据
-		if(WxPayConfig::REPORT_LEVENL == 0){
+		if(config('WxPay.REPORT_LEVENL') == 0){
 			return;
 		}
 		//如果仅失败上报
-		if(WxPayConfig::REPORT_LEVENL == 1 &&
+		if(config('WxPay.REPORT_LEVENL') == 1 &&
 			 array_key_exists("return_code", $data) &&
 			 $data["return_code"] == "SUCCESS" &&
 			 array_key_exists("result_code", $data) &&
@@ -520,17 +520,17 @@ class wxpayapi
 	 * @param int $second   url执行超时时间，默认30s
 	 * @throws WxPayException
 	 */
-	private static function postXmlCurl($xml, $url, $useCert = false, $second = 30)
+	private function postXmlCurl($xml, $url, $useCert = false, $second = 30)
 	{
 		$ch = curl_init();
 		//设置超时
 		curl_setopt($ch, CURLOPT_TIMEOUT, $second);
 
 		//如果有配置代理这里就设置代理
-		if(WxPayConfig::CURL_PROXY_HOST != "0.0.0.0"
-			&& WxPayConfig::CURL_PROXY_PORT != 0){
-			curl_setopt($ch,CURLOPT_PROXY, WxPayConfig::CURL_PROXY_HOST);
-			curl_setopt($ch,CURLOPT_PROXYPORT, WxPayConfig::CURL_PROXY_PORT);
+		if(config('WxPay.CURL_PROXY_HOST') != "0.0.0.0"
+			&& config('WxPay.CURL_PROXY_PORT') != 0){
+			curl_setopt($ch,CURLOPT_PROXY, config('WxPay.CURL_PROXY_HOST'));
+			curl_setopt($ch,CURLOPT_PROXYPORT, config('WxPay.CURL_PROXY_PORT'));
 		}
 		curl_setopt($ch,CURLOPT_URL, $url);
 		curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,TRUE);
@@ -544,9 +544,9 @@ class wxpayapi
 			//设置证书
 			//使用证书：cert 与 key 分别属于两个.pem文件
 			curl_setopt($ch,CURLOPT_SSLCERTTYPE,'PEM');
-			curl_setopt($ch,CURLOPT_SSLCERT, WxPayConfig::SSLCERT_PATH);
+			curl_setopt($ch,CURLOPT_SSLCERT, config('WxPay.SSLCERT_PATH'));
 			curl_setopt($ch,CURLOPT_SSLKEYTYPE,'PEM');
-			curl_setopt($ch,CURLOPT_SSLKEY, WxPayConfig::SSLKEY_PATH);
+			curl_setopt($ch,CURLOPT_SSLKEY, config('WxPay.SSLKEY_PATH'));
 		}
 		//post提交方式
 		curl_setopt($ch, CURLOPT_POST, TRUE);
@@ -567,7 +567,7 @@ class wxpayapi
 	/**
 	 * 获取毫秒级别的时间戳
 	 */
-	private static function getMillisecond()
+	private function getMillisecond()
 	{
 		//获取毫秒的时间戳
 		$time = explode ( " ", microtime () );

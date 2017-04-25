@@ -2,7 +2,7 @@
 ini_set('date.timezone','Asia/Shanghai');
 error_reporting(E_ERROR);
 
-require_once "../WxPayApi.php";
+require_once "../WxpayApi.php";
 require_once '../WxPayNotify.php';
 require_once 'log.php';
 
