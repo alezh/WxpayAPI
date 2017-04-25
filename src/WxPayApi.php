@@ -9,7 +9,7 @@ namespace Alezh\WxPay;
  * @author widyhu
  *
  */
-class WxpayApi
+class WxPayApi
 {
 	/**
 	 *
