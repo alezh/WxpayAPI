@@ -10,7 +10,7 @@ composer require alezh/WxPay
 
 或者在你的 `composer.json` 的 require 部分中添加:
 ```json
- "alezh/WxPay": "~1.0"
+ "alezh/WxPay": "~2.0"
 ```
 
 下载完毕之后,直接配置 `config/app.php` 的 `providers`:
