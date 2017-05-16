@@ -13,9 +13,11 @@ composer require alezh/WxPay
  "alezh/WxPay": "~2.0"
 ```
 
-下载完毕之后,直接配置 `config/app.php` 的 `providers`:
+下载完毕之后,直接配置 `config/app.php` 的 `providers`,`aliases`:
 
 ```php
 \Alezh\WxPay\WxPayProvider::class,
+
+'WxPay' => Alezh\WxPay\Facades\WxPay::class
 ```
 $ php artisan vendor:publish --provider="Alezh\WxPay\WxPayProvider"
